@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Helloworld
+Bundle-SymbolicName: com.ifool.osgidemo.helloworld
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.ifool.osgidemo.helloworld.Activator
+Bundle-Vendor: IFOOL
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
