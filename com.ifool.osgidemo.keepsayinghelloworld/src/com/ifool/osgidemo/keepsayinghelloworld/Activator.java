@@ -1,10 +1,10 @@
-package com.ifool.osgidemo.helloworld;
+package com.ifool.osgidemo.keepsayinghelloworld;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
 import com.ifool.osgidemo.ihelloworld.ISayHello;
-import com.ifool.osgidemo.ihelloworldimpl.SayHello;
 
 public class Activator implements BundleActivator {
 
@@ -20,8 +20,12 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		//System.out.println("Hello World");
-		context.registerService(ISayHello.class.getName(), new SayHello(), null);
+		ServiceReference<ISayHello> ref = context.getServiceReference(ISayHello.class);
+		ISayHello sayHello = context.getService(ref);
+		KeepSaying keepSaying = new KeepSaying();
+		keepSaying.setSayHello(sayHello);
+		new Thread(keepSaying).start();
+		System.out.println("keep saying");
 	}
 
 	/*
@@ -30,7 +34,6 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
-		System.out.println("Goodbye World");
 	}
 
 }
